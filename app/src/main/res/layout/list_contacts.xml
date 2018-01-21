@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context="com.ndstudio.contacts.MainActivity">
+
+    <ImageView android:id="@+id/searchIco"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/search"
+        android:layout_marginTop="68dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:scaleType="fitXY"/>
+
+    <EditText android:id="@+id/editSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:hint="  Search Contact"
+        android:layout_toRightOf="@+id/searchIco"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:inputType="textCapWords"></EditText>
+
+    <ListView android:id="@+id/list"
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_below="@id/editSearch"
+        android:layout_height="wrap_content"></ListView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/new_add"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="40dp"
+        android:layout_marginRight="30dp"
+        android:clickable="true"
+        android:id="@+id/add" />
+
+</RelativeLayout>

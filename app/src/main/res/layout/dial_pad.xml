@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ListView android:id="@+id/dialList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/dialNum"
+        android:layout_marginTop="68dp"></ListView>
+
+    <ImageView android:id="@+id/backspace"
+        android:layout_width="35dp"
+        android:layout_height="50dp"
+        android:layout_above="@+id/dialPad"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/back_press"
+        android:background="#ffffff"
+        android:layout_marginRight="3dp"
+        android:clickable="true"/>
+    <GridView android:id="@+id/dialPad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="3"
+        android:layout_above="@+id/callButton"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:gravity="center"
+        android:listSelector="@color/contact_bg"></GridView>
+
+
+    <ImageButton android:id="@+id/callButton"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:text="Call"
+        android:scaleType="fitXY"
+        android:src="@drawable/call_button"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:background="#00ffffff"></ImageButton>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textStyle="bold"
+        android:textSize="40dp"
+        android:layout_above="@+id/dialPad"
+        android:id="@+id/dialNum"
+        android:background="#ffffff"
+        android:gravity="top|right"
+        android:textColor="#000000"
+        android:paddingRight="10dp"
+        android:layout_toLeftOf="@+id/backspace"/>
+</RelativeLayout>

@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Contacts</string>
+    <string name="image_address">/sdcard/DirName/</string>
+</resources>
