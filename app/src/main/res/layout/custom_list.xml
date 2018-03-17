@@ -8,7 +8,7 @@
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginLeft="5dp"
         android:clickable="true"
         android:src="@drawable/blank_dp"
         android:id="@+id/listDP"
@@ -19,23 +19,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginLeft="12dp"
+        android:layout_marginLeft="20dp"
         android:layout_weight="1">
 
-        <TextView android:id="@+id/listName"
+        <TextView
+            android:id="@+id/listName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hello"
-            android:textStyle="bold"
-            android:textAppearance="?android:textAppearanceMedium"
             android:layout_marginLeft="5dp"
-            android:textColor="@color/abc_primary_text_disable_only_material_light" />
-        <TextView android:id="@+id/listNumber"
+            android:text="Hello"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@color/abc_primary_text_disable_only_material_light"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/listNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="123456"
-            android:textAppearance="?android:textAppearanceMedium"/>
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textSize="14sp" />
 
 
     </LinearLayout>

@@ -76,8 +76,7 @@ public class contact_view extends AppCompatActivity {
 
         if(new File(img).exists()==false)
             img = "@drawable/blank_dp";
-
-        if(!img.equals("@drawable/blank_dp"))
+        else
         {
             RoundedBitmapDrawable roundDP = RoundedBitmapDrawableFactory.create(getResources(),BitmapFactory.decodeFile(img));
             roundDP.setCircular(true);
@@ -104,7 +103,6 @@ public class contact_view extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 editIntent.putExtra("id",_id);
                 editIntent.putExtra("choice","update");
                 startActivity(editIntent);

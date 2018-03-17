@@ -7,15 +7,19 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Message;
 import android.provider.CalendarContract;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.webkit.ConsoleMessage;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
@@ -23,6 +27,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.Console;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -65,7 +70,6 @@ public class contact_edit extends AppCompatActivity {
         address = (EditText)findViewById(R.id.address);
         dispPic = (ImageView)findViewById(R.id.dispPic);
         date = (EditText)findViewById(R.id.birthDate);
-        img = "@drawable/blank_dp";
 
         Cursor cursorGroup = dbh.selectGroup();
         ArrayList<String> mArrayList = new ArrayList<String>();
@@ -89,17 +93,21 @@ public class contact_edit extends AppCompatActivity {
             date.setText(cursor.getString(cursor.getColumnIndex("dob")));
             img = cursor.getString(cursor.getColumnIndex("img"));
             mobilePic = cursor.getString(cursor.getColumnIndex("mobile"));
-
-            if(!img.equals("@drawable/blank_dp"))
-            if(new File(img).exists()==false)
+            File availFile = new File("/sdcard/DirName/"+mobile.getText().toString());
+            if(!img.equals("@drawable/blank_dp")&&!availFile.exists())
                 img = "@drawable/blank_dp";
-
-            if(!img.equals("@drawable/blank_dp"))
+            else if(availFile.exists()) {
+                img = "/sdcard/DirName/" + mobile.getText().toString();
+            }
+            dispPic.setImageResource(R.drawable.blank_dp);
+            Log.d("mobile",mobile.getText().toString());
+            Toast.makeText(this, img, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, availFile.exists()?"true":"false", Toast.LENGTH_SHORT).show();
+            if(availFile.exists())
             {
                 RoundedBitmapDrawable roundDP = RoundedBitmapDrawableFactory.create(getResources(), BitmapFactory.decodeFile(img));
                 roundDP.setCircular(true);
                 roundDP.setAntiAlias(true);
-
                 dispPic.setImageDrawable(roundDP);
             }
         }
@@ -121,28 +129,24 @@ public class contact_edit extends AppCompatActivity {
                 strAddress = address.getText().toString();
                 strGroup = group.getText().toString();
 
+                if(img.equals("done") || new File("/sdcard/DirName/" + strMobile).exists())
+                    img = "/sdcard/DirName/" + strMobile;
+
                 if(strGroup.trim().isEmpty())
                     strGroup = "UNCATEGORIZED";
 
                 strDob = date.getText().toString();
 
-                if(img.equals("done"))
-                    img = "/sdcard/DirName/"+strMobile;
-
                 switch (choice)
                 {
                     case "add" :
 
-                        if(strName.trim().isEmpty())
-                        {
-                            name.setError("Enter Your Name");
-                            return;
+                        if(strName.trim().isEmpty()) {
+                            name.setError("Enter Your Name"); return;
                         }
 
-                        if (strMobile.trim().isEmpty())
-                        {
-                            mobile.setError("Enter Mobile Number");
-                            return;
+                        if (strMobile.trim().isEmpty()) {
+                            mobile.setError("Enter Mobile Number"); return;
                         }
 
                         long tag;
@@ -164,16 +168,8 @@ public class contact_edit extends AppCompatActivity {
                         break;
 
                     case "update" :
-                        if(!img.equals("@drawable/blank_dp"))
-                            img = "/sdcard/DirName/"+strMobile;
                         dbh.editEntry(_id,strName, strMobile, strEmail, strAddress, img, strGroup, strDob);
                         Toast.makeText(contact_edit.this, "Contact Updated Successfully", Toast.LENGTH_SHORT).show();
-                        if(!img.equals("@drawable/blank_dp"))
-                            createDirectoryAndSaveFile(photo,strMobile);
-                        File file = new File(new File("/sdcard/DirName/"),mobilePic);
-                        if (file.exists()) {
-                            file.renameTo(new File(img));
-                        }
                         break;
                 }
 
@@ -211,7 +207,6 @@ public class contact_edit extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int item) {
                 if (items[item].equals("Take Photo")) {
                     img = "done";
-
                     Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(cameraIntent, CAMERA);
                 } else if (items[item].equals("Choose from gallery")) {
@@ -248,6 +243,7 @@ public class contact_edit extends AppCompatActivity {
 
             ImageView dispPic = (ImageView)findViewById(R.id.dispPic);
             dispPic.setImageDrawable(roundDP);
+            createDirectoryAndSaveFile(roundDP.getBitmap(),mobile.getText().toString());
         }
 
         else if(requestCode == CAMERA && resultCode == RESULT_OK && data != null)

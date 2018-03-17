@@ -56,11 +56,9 @@ public class ContactCursorAdapter extends CursorAdapter{
         else
         {
             File file = new File(img);
-
             RoundedBitmapDrawable roundDP = RoundedBitmapDrawableFactory.create(view.getResources(), BitmapFactory.decodeFile(img));
             roundDP.setCircular(true);
             roundDP.setAntiAlias(true);
-
             listDP.setImageDrawable(roundDP);
             if(!file.exists())
                 listDP.setImageResource(R.drawable.blank_dp);

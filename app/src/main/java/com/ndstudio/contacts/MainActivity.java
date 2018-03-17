@@ -1,39 +1,39 @@
 package com.ndstudio.contacts;
 
+import android.Manifest;
 import android.app.TabActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.PermissionChecker;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TabHost;
 
-public class MainActivity extends TabActivity implements SensorEventListener {
+import java.security.Permission;
+import java.security.Permissions;
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends TabActivity {
 
     TabHost tabHost;
     TabHost.TabSpec tabspec1, tabspec2, tabspec3;
-    private float mLastX, mLastY, mLastZ;
-    private boolean mInitialized;
-    private SensorManager mSensorManager;
-    private Sensor mAccelerometer;
-    private final float NOISE = (float) 5.0;
-    int flag = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        mInitialized = false;
-        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
 
         tabHost=getTabHost();
 
@@ -58,67 +58,31 @@ public class MainActivity extends TabActivity implements SensorEventListener {
 
         tabHost.setCurrentTab(1);
 
+        int readStorage = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+        int writeStorage = ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int call = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
+        List<String> listPermissionsNeeded = new ArrayList<>();
+        if(readStorage!= PackageManager.PERMISSION_GRANTED)
+            listPermissionsNeeded.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+        if(writeStorage != PackageManager.PERMISSION_GRANTED)
+            listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if(call!=PackageManager.PERMISSION_GRANTED)
+            listPermissionsNeeded.add(Manifest.permission.CALL_PHONE);
+
+        if (!listPermissionsNeeded.isEmpty())
+        {
+            ActivityCompat.requestPermissions(this,listPermissionsNeeded.toArray
+                    (new String[listPermissionsNeeded.size()]),1);
+        }
+
+
     }
 
     protected void onResume() {
         super.onResume();
-        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
     }
     protected void onPause() {
         super.onPause();
-        mSensorManager.unregisterListener(this);
-    }
-
-    @Override
-    public void onSensorChanged(SensorEvent event) {
-
-
-        AlertDialog.Builder about = new AlertDialog.Builder(MainActivity.this);
-        about.setMessage("This is Our Contact App And We Are Nishchhal, Paryul and Priya");
-        about.setTitle("About Us");
-        about.setCancelable(false);
-        about.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                flag = 0;
-            }
-        });
-
-        float x = event.values[0];
-        float y = event.values[1];
-        float z = event.values[2];
-        if (!mInitialized) {
-            mLastX = x;
-            mLastY = y;
-            mLastZ = z;
-            mInitialized = true;
-        } else {
-            float deltaX = Math.abs(mLastX - x);
-            float deltaY = Math.abs(mLastY - y);
-            float deltaZ = Math.abs(mLastZ - z);
-            if (deltaX < NOISE) deltaX = (float) 0.0;
-            if (deltaY < NOISE) deltaY = (float) 0.0;
-            if (deltaZ < NOISE) deltaZ = (float) 0.0;
-            mLastX = x;
-            mLastY = y;
-            mLastZ = z;
-
-            if(flag == 1)
-            {
-                return;
-            }
-
-            if (deltaX > deltaY) {
-
-                about.show();
-                flag = 1;
-            }
-        }
-    }
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
     }
 
 }

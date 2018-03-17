@@ -26,19 +26,6 @@ public class splash extends AppCompatActivity {
 
         setContentView(R.layout.splash);
 
-        Drawable backgrounds[] = new Drawable[2];
-        Resources res = getResources();
-        backgrounds[0] = res.getDrawable(R.drawable.splashscreen);
-        backgrounds[1] = res.getDrawable(R.drawable.splashblue);
-
-
-        TransitionDrawable crossfader = new TransitionDrawable(backgrounds);
-
-        ImageView image = (ImageView)findViewById(R.id.splash);
-        image.setImageDrawable(crossfader);
-
-        crossfader.isCrossFadeEnabled();
-        crossfader.startTransition(3000);
         final Intent intent = new Intent(this,MainActivity.class);
 
         handler = new Handler();
@@ -50,6 +37,7 @@ public class splash extends AppCompatActivity {
                 finish();
             }
         },3000);
+
 
     }
 }

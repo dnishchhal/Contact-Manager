@@ -2,52 +2,30 @@ package com.ndstudio.contacts;
 
 import android.Manifest;
 import android.annotation.TargetApi;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.AssetManager;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.PictureDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.renderscript.ScriptGroup;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ListAdapter;
-import android.widget.SearchView;
-import android.telecom.PhoneAccountHandle;
-import android.telephony.SubscriptionManager;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.CursorAdapter;
 import android.widget.EditText;
-import android.widget.FilterQueryProvider;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Toast;
-
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Method;
 
 import static com.ndstudio.contacts.R.color.Transparent;
 
@@ -86,6 +64,7 @@ public class list_contacts extends AppCompatActivity  {
         cursorAdapter = new ContactCursorAdapter(this,cursor,0);
 
         listView.setAdapter(cursorAdapter);
+
 
         //Code Copied From Here
         listClick(this);
@@ -149,21 +128,23 @@ public class list_contacts extends AppCompatActivity  {
     }
 
     public void listDP(View view) throws IOException {
+        LayoutInflater inflater = LayoutInflater.from(list_contacts.this);
+        View customDialog = inflater.inflate(R.layout.alertbuilder,null);
+
         int id = Integer.parseInt(view.getTag().toString());
         Cursor cursor = dbHandler.getSpecific(id);
         AlertDialog.Builder dpBulider = new AlertDialog.Builder(this);
-        ImageView dpImage = new ImageView(this);
-        dpImage.setScaleType(ImageView.ScaleType.FIT_XY);
         String img = cursor.getString(cursor.getColumnIndex("img"));
+        ImageView dp = ((ImageView)customDialog.findViewById(R.id.alertbuilder));
 
-        dpBulider.setView(dpImage);
+        dpBulider.setView(customDialog);
         if(img.equals("@drawable/blank_dp"))
         {
-            dpImage.setImageResource(R.drawable.blank_dp);
+            dp.setImageResource(R.drawable.blank_dp);
         }
         else
         {
-            dpImage.setImageBitmap(BitmapFactory.decodeFile(img));
+            dp.setImageBitmap(BitmapFactory.decodeFile(img));
         }
         dpBulider.show().getWindow().setLayout(400,400);
     }

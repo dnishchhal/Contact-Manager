@@ -38,8 +38,6 @@ public class Dialer extends list_contacts {
     ImageView backspace;
     ListView dialList;
 
-    int img[] = {R.drawable.num1, R.drawable.num2, R.drawable.num3, R.drawable.num4, R.drawable.num5,
-            R.drawable.num6, R.drawable.num7, R.drawable.num8, R.drawable.num9, R.drawable.star, R.drawable.num0, R.drawable.hash};
     String []arr = {"1","2","3","4","5","6","7","8","9","*","0","#"};
 
     @Override
@@ -52,7 +50,6 @@ public class Dialer extends list_contacts {
         dialNum = (TextView)findViewById(R.id.dialNum);
         backspace = (ImageView)findViewById(R.id.backspace);
         num = new String();
-        //dialPad.setAdapter(new ImageAdapter(this));
         dialPad.setAdapter(new ArrayAdapter<String>(this,R.layout.custom_dial,arr));
         dialList = (ListView)findViewById(R.id.dialList);
 
