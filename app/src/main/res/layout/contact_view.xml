@@ -9,38 +9,39 @@
     android:background="@drawable/contact_view_bg">
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_menu_edit"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="60dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginRight="20dp"
         android:clickable="true"
-        android:id="@+id/edit"/>
+        android:src="@android:drawable/ic_menu_edit" />
 
 
-    <RelativeLayout android:id="@+id/design"
+    <RelativeLayout
+        android:id="@+id/design"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="50dp"
         android:layout_marginLeft="25dp"
-        android:layout_marginBottom="85dp"
         android:layout_marginRight="25dp"
         android:layout_marginTop="120dp"
         android:background="#8cffffff">
 
 
         <TextView
+            android:id="@+id/click"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="_______About_______"
+            android:layout_below="@+id/dispPic"
             android:layout_marginTop="105dp"
+            android:gravity="center"
             android:singleLine="true"
+            android:text="_______About_______"
             android:textSize="25sp"
-            android:textStyle="bold"
-            android:id="@+id/click"
-            android:layout_below="@+id/dispPic"/>
+            android:textStyle="bold" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -56,130 +57,136 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginLeft="10dp"
-                    android:src="@drawable/name"
-                    android:adjustViewBounds="false" />
+                    android:adjustViewBounds="false"
+                    android:src="@drawable/name" />
 
-                <TextView android:id="@+id/txtName"
+                <TextView
+                    android:id="@+id/txtName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="This is My Name"
-                    android:textSize="25sp"
                     android:layout_gravity="center"
                     android:layout_marginBottom="20dp"
-                    android:layout_marginLeft="70dp"/>
+                    android:layout_marginLeft="70dp"
+                    android:text="This is My Name"
+                    android:textSize="25sp" />
 
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="10dp"
                     android:layout_below="@+id/txtName"
-                    android:src="@drawable/number"
-                    android:onClick="callNumber" />
+                    android:layout_marginLeft="10dp"
+                    android:onClick="callNumber"
+                    android:src="@drawable/number" />
 
-                <TextView android:id="@+id/txtNumber"
+                <TextView
+                    android:id="@+id/txtNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="This is My Number"
-                    android:textSize="25sp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="70dp"
                     android:layout_below="@+id/txtName"
+                    android:layout_gravity="center"
                     android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="70dp"
                     android:layout_weight="1"
-                    android:onClick="callNumber" />
+                    android:onClick="callNumber"
+                    android:text="This is My Number"
+                    android:textSize="25sp" />
 
 
                 <ImageButton
+                    android:id="@+id/msg"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:scaleType="fitXY"
-                    android:layout_marginRight="10dp"
-                    android:src="@drawable/message"
-                    android:clickable="true"
-                    android:id="@+id/msg"
-                    android:layout_marginLeft="10dp"
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/txtName"
-                    android:background="#00ffffff" />
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="#00ffffff"
+                    android:clickable="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/message" />
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="10dp"
-                    android:src="@drawable/email"
-                    android:scaleType="fitCenter"
-                    android:layout_below="@+id/txtNumber"
                     android:id="@+id/imgMail"
-                    android:onClick="sendMail"/>
-
-                <TextView android:id="@+id/txtEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="This is My Email"
-                    android:textSize="25sp"
-                    android:layout_gravity="center"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_below="@+id/txtNumber"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginLeft="70dp"/>
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
                     android:layout_marginLeft="10dp"
-                    android:src="@drawable/address"
+                    android:onClick="sendMail"
                     android:scaleType="fitCenter"
-                    android:layout_below="@id/txtEmail"
-                    android:id="@+id/imgAddress" />
+                    android:src="@drawable/email" />
 
-                <TextView android:id="@+id/txtAddress"
+                <TextView
+                    android:id="@+id/txtEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtNumber"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="70dp"
+                    android:text="This is My Email"
+                    android:textSize="25sp" />
+
+                <ImageView
+                    android:id="@+id/imgAddress"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_below="@id/txtEmail"
+                    android:layout_marginLeft="10dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/address" />
+
+                <TextView
+                    android:id="@+id/txtAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtEmail"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="70dp"
                     android:text="This is My Address"
-                    android:textSize="25sp"
-                    android:layout_below="@id/txtEmail"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginLeft="70dp"/>
+                    android:textSize="25sp" />
 
                 <ImageView
+                    android:id="@+id/imgGroup"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="10dp"
-                    android:src="@drawable/group"
-                    android:scaleType="fitCenter"
                     android:layout_below="@+id/txtAddress"
-                    android:id="@+id/imgGroup" />
+                    android:layout_marginLeft="10dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/group" />
 
-                <TextView android:id="@+id/txtGroup"
+                <TextView
+                    android:id="@+id/txtGroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtAddress"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="70dp"
                     android:text="This is My Group"
-                    android:layout_below="@+id/txtAddress"
-                    android:textSize="25sp"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginLeft="70dp"/>
+                    android:textSize="25sp" />
 
 
                 <ImageView
+                    android:id="@+id/imgBirthDay"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="10dp"
-                    android:src="@drawable/cake"
-                    android:scaleType="fitCenter"
                     android:layout_below="@+id/txtGroup"
-                    android:id="@+id/imgBirthDay" />
+                    android:layout_marginLeft="10dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/cake" />
 
-                <TextView android:id="@+id/txtBirthDay"
+                <TextView
+                    android:id="@+id/txtBirthDay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="This is My Birthday"
-                    android:textSize="25sp"
-                    android:layout_gravity="center"
                     android:layout_below="@+id/txtGroup"
+                    android:layout_gravity="center"
                     android:layout_marginBottom="20dp"
-                    android:layout_marginLeft="70dp"/>
+                    android:layout_marginLeft="70dp"
+                    android:text="This is My Birthday"
+                    android:textSize="25sp" />
 
 
             </RelativeLayout>

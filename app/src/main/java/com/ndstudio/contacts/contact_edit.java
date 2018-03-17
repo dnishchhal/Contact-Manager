@@ -70,6 +70,7 @@ public class contact_edit extends AppCompatActivity {
         address = (EditText)findViewById(R.id.address);
         dispPic = (ImageView)findViewById(R.id.dispPic);
         date = (EditText)findViewById(R.id.birthDate);
+        img = "@drawable/blank_dp";
 
         Cursor cursorGroup = dbh.selectGroup();
         ArrayList<String> mArrayList = new ArrayList<String>();
